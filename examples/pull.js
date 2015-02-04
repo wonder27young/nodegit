@@ -1,7 +1,7 @@
 var nodegit = require("../");
 var path = require("path");
 
-var repoDir = "../../test";
+var repoDir = "../downstream";
 
 var repository;
 
