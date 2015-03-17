@@ -1,12 +1,7 @@
-/build/
 /example/
 /examples/
+/guides/
 /test/
-/vendor/Release/
-
-/generate/output
-/generate/**/*.json
-!/generate/input/*.json
 
 .astylerc
 .editorconfig
@@ -15,7 +10,6 @@
 .jshintrc
 .travis.yml
 appveyor.yml
-.didntcomefromthenpmregistry
 
 *.vcxproj
 *.filters

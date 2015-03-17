@@ -35,74 +35,67 @@ function getVendorLib(name) {
 
   var version = vendorPackage.sha || vendorPackage.version;
 
-  console.info("[nodegit] Detecting " + vendorPath + version + ".");
   return check(name)
     .then(function(exists) {
       if (exists) {
-        console.info("[nodegit] " + vendorPath + version + " already exists.");
-        return Promise.resolve();
+        return true;
       }
-      else {
-        return check(name, true)
-          .then(function(exists) {
-            if (exists) {
-              console.info("[nodegit] Removing outdated " + vendorPath + ".");
-              return fse.remove(rooted(vendorPath));
-            }
-            else {
-              console.info("[nodegit] " + vendorPath + " not found.");
-              return Promise.resolve();
-            }
-          })
-          .then(function() {
-            return new Promise(function (resolve, reject) {
-              console.info("[nodegit] Retrieving " + vendorPath + ".");
+      return check(name, true)
+        .then(function(exists) {
+          if (exists) {
+            console.info("[nodegit] Removing wrong version of " +
+              vendorPath + ".");
+            return fse.remove(rooted(vendorPath));
+          }
+        })
+        .then(function() {
+          return new Promise(function (resolve, reject) {
+            console.info("[nodegit] Retrieving " + vendorPath + ".");
 
-              var extract = tar.Extract({
-                path: rooted("vendor/" + name + "/"),
-                strip: true
-              });
-
-              request.get(vendorPackage.url)
-                .pipe(zlib.createUnzip())
-                .pipe(extract)
-                .on("error", reject)
-                .on("end", resolve);
+            var extract = tar.Extract({
+              path: rooted("vendor/" + name + "/"),
+              strip: true
             });
 
-          })
-          .then(function() {
-            return fse.writeFile(rooted(vendorPath + version), "");
-          })
-          .then(function() {
-            if ((name == "libssh2") && (process.platform !== "win32")) {
-              return new Promise(function(resolve, reject) {
-                console.info("[nodegit] Configuring libssh2.");
-                cp.execFile(
-                  rooted(vendorPath) + "configure",
-                  {cwd: rooted(vendorPath)},
-                  function(err, stdout, stderr) {
-                    if (err) {
-                      console.error(err);
-                      console.error(stderr);
-                      reject(err, stderr);
-                    }
-                    else {
-                      resolve(stdout);
-                    }
-                  }
-                );
-              });
-            }
-            else {
-              return Promise.resolve();
-            }
-          })
-          .then(function() {
-            console.info("[nodegit] Successfully updated " + vendorPath +
-              version + ".");
+            request.get(vendorPackage.url)
+              .pipe(zlib.createUnzip())
+              .pipe(extract)
+              .on("error", reject)
+              .on("end", resolve);
           });
-      }
+
+        })
+        .then(function() {
+          return fse.writeFile(rooted(vendorPath + version), "");
+        })
+        .then(function() {
+          if ((name == "libssh2") && (process.platform !== "win32")) {
+            return new Promise(function(resolve, reject) {
+              console.info("[nodegit] Configuring libssh2.");
+              cp.execFile(
+                rooted(vendorPath) + "configure",
+                {cwd: rooted(vendorPath)},
+                function(err, stdout, stderr) {
+                  if (err) {
+                    console.error(err);
+                    console.error(stderr);
+                    reject(err, stderr);
+                  }
+                  else {
+                    resolve(stdout);
+                  }
+                }
+              );
+            });
+          }
+          else {
+            return Promise.resolve();
+          }
+        })
+        .then(function() {
+          console.info("[nodegit] Successfully updated " + vendorPath +
+            " to " + version + ".");
+        });
     });
 
 }

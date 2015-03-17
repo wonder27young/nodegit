@@ -47,6 +47,16 @@ function checkVendor(name, skipVersion) {
 }
 module.exports.checkVendor = checkVendor;
 
+function checkVendorVersioned(name) {
+  return checkVendor(name, false);
+}
+module.exports.checkVendorVersioned = checkVendorVersioned;
+
+function checkVendorAnyVersion(name) {
+  return checkVendor(name, true);
+}
+module.exports.checkVendorAnyVersion = checkVendorAnyVersion;
+
 function checkGenerated() {
   return Promise.all([
     checkExists("lib/nodegit.js"),

@@ -56,10 +56,11 @@
   "dependencies": {
     "fs-extra": "^0.16.3",
     "node-pre-gyp": "^0.6.2",
+    "node-spinner": "0.0.4",
     "nodegit-promise": "~1.0.0",
     "npm": "^2.5.0",
     "promisify-node": "^0.1.5",
-    "which-native-nodish": "^1.0.3"
+    "which-native-nodish": "1.0.3"
   },
   "devDependencies": {
     "combyne": "^0.6.5",
@@ -88,7 +89,7 @@
     "generateJson": "node generate/scripts/generateJson",
     "generateNativeCode": "node generate/scripts/generateNativeCode",
     "generateMissingTests": "node generate/scripts/generateMissingTests",
-    "prepublish": "node lifecycleScripts/prepareForBuild.js",
+    "prepublish": "node lifecycleScripts/prepublish.js",
     "publish": "node-pre-gyp package && node-pre-gyp publish",
     "install": "node lifecycleScripts/install",
     "installDebug": "BUILD_DEBUG=true npm install",
