@@ -49,7 +49,6 @@ function doGenerate() {
         catch (e) {
           console.info("[nodegit] Error generating code.");
           console.info(e);
-          //console.info(stderr);
           reject(e);
         }
       });
