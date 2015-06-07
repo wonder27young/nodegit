@@ -1,19 +1,15 @@
-var Promise = require("nodegit-promise");
 var promisify = require("promisify-node");
 var path = require("path");
 var fs = require("fs");
 
 var checkPrepared = require("./checkPrepared");
-var whichNativeNodish = require("which-native-nodish");
 var prepareForBuild = require("./prepareForBuild");
 
 var exec = promisify(function(command, opts, callback) {
   return require("child_process").exec(command, opts, callback);
 });
-var nwVersion = null;
-var asVersion = null;
 
-var local = path.join.bind(path, __dirname);
+var local = path.join.bind(path.join, __dirname);
 
 if (fs.existsSync(local("../.didntcomefromthenpmregistry"))) {
   return checkAndBuild();
@@ -44,12 +40,5 @@ function checkAndBuild() {
   console.info("[nodegit] Making sure dependencies are available and native " +
     "code is generated");
 
-  return checkPrepared.checkAll()
-    .then(function(allGood) {
-      if (!allGood) {
-        console.info("[nodegit] Something is missing, retrieving " +
-        "dependencies and regenerating code");
-        return prepareForBuild();
-      }
-    });
+  return prepareForBuild();
 }
