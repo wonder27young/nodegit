@@ -40,5 +40,12 @@ function checkAndBuild() {
   console.info("[nodegit] Making sure dependencies are available and native " +
     "code is generated");
 
-  return prepareForBuild();
+  return prepareForBuild().then(
+    function() {
+      process.exit(0);
+    },
+    function() {
+      process.exit(1);
+    }
+  );
 }

@@ -58,8 +58,7 @@
     "node-pre-gyp": "^0.6.5",
     "nodegit-promise": "^2.0.1",
     "npm": "^2.9.0",
-    "promisify-node": "^0.1.5",
-    "which-native-nodish": "^1.1.1"
+    "promisify-node": "^0.1.5"
   },
   "devDependencies": {
     "combyne": "^0.8.0",
@@ -71,8 +70,6 @@
     "lodash": "^3.8.0",
     "mocha": "^2.2.4",
     "nan": "^1.8.4",
-    "nw-gyp": "^0.12.4",
-    "pangyp": "^2.1.0",
     "request": "^2.55.0",
     "tar": "^2.1.0"
   },
@@ -94,9 +91,7 @@
     "generateJson": "node generate/scripts/generateJson",
     "generateNativeCode": "node generate/scripts/generateNativeCode",
     "generateMissingTests": "node generate/scripts/generateMissingTests",
-    "prepublish": "node lifecycleScripts/prepareForBuild.js",
     "publish": "node-pre-gyp package && node-pre-gyp publish",
-    "install": "node lifecycleScripts/install",
     "installDebug": "node lifecycleScripts/install --buildDebug",
     "recompile": "pangyp configure build",
     "rebuild": "node generate && pangyp configure build",
