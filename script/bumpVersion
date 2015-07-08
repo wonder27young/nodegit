@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+var fse = require("fs-extra");
+var path = require("path");
+var pkg = require("../package");
+
+var version = pkg.version.split(".");
+console.dir(version);
+version[2] = parseInt(version[2])+1;
+version = version.join(".");
+console.dir(version);
+pkg.version = version;
+console.dir(pkg);
+
+fse.writeJsonSync(path.join(__dirname, "..", "package.json"), pkg, {spaces: 2});
