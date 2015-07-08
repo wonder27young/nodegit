@@ -1,13 +1,18 @@
 /build/
+/coverage/
 /example/
 /examples/
 /test/
 /vendor/Release/
+/vendor/*.vcxproj
+/vendor/*.filters
+/vendor/*.sln
+/vendor/*.exe
+/vendor/*.ppk
 
 /generate/output
-/generate/**/*.json
-!/generate/input/*.json
 
+/binding.gyp
 .astylerc
 .editorconfig
 .gitignore
@@ -15,10 +20,12 @@
 .jshintrc
 .travis.yml
 appveyor.yml
-.didntcomefromthenpmregistry
 
 *.vcxproj
 *.filters
 *.sln
 *.log
 *.md
+
+.DS_STORE
+.idea
