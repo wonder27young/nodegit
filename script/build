@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+var Promise = Promise || require('nodegit-promise');
+var generate = require('../generate');
+var npg = require('./helpers/nodePreGyp');
+
+generate()
+  .then(function() {
+    var args = ['rebuild'].concat(process.argv.slice(2));
+
+    return npg(args);
+  });
