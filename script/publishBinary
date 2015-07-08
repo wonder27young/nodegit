@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+var promisify = require("promisify-node");
+var Promise = require("nodegit-promise");
+var fse = promisify("fs-extra");
+var path = require("path");
+var npg = require("./helpers/nodePreGyp");
+
+var releaseDir = path.join(__dirname, "..", "build", "Release");
+return Promise.all(fse.readdir(releaseDir)
+  .then(function(contents) {
+    var promises = contents.map(function(item) {
+      if (item == "nodegit.node") {
+        return Promise.resolve();
+      }
+
+      return fse.remove(path.join(releaseDir, item));
+    });
+    return Promise.all(promises);
+  })
+  .then(function() {
+    return npg(["package"]);
+  })
+  .then(function() {
+    return npg(["publish"]);
+  });
+  .catch(function(reason) {
+    console.error(reason);
+  });

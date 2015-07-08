@@ -1,15 +1,41 @@
 #!/usr/bin/env node
+var fs = require("fs");
 var npg = require("./helpers/nodePreGyp");
 var spawn = require("./helpers/spawn");
 
-npg(["install"].concat(process.argv.slice(2)))
-  .then(function() {
-    console.info("[nodegit]: Downloaded binary from S3");
-  })
-  .catch(function(e) {
-    console.info("[nodegit]: Failed downloading binary from S3, compiling");
-    return spawn("./script/boostrap")
+// nodegit-promise won't be there if installing from a git repo
+var fromReg;
+try {
+  require("nodegit-promise");
+  fromReg = true;
+}
+catch(e) {
+  fromReg = false;
+}
+
+if (fromReg) {
+  return npg(["install"].concat(process.argv.slice(2)))
     .then(function() {
-      return spawn("./script/build");
+      console.info("[nodegit]: Downloaded binary from S3");
+    })
+    .catch(function(e) {
+      console.info("[nodegit]: Failed downloading binary from S3, compiling");
+      return spawn.promise("./script/bootstrap")
+        .then(function() {
+          return spawn.promise("./script/build");
+        });
+    });
+}
+else {
+  spawn("./script/bootstrap", [], function(code) {
+    if (code != 0) {
+      console.error("[nodegit]: failed bootstrapping");
+      process.exit(code);
+    }
+    spawn("script/build", [], function(code) {
+      if (code != 0) {
+        process.exit(code);
+      }
     });
   });
+}

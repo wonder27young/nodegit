@@ -94,6 +94,7 @@
     "mocha": "mocha test/runner test/tests",
     "mochaDebug": "mocha --debug-brk test/runner test/tests",
     "test": "npm run lint && (iojs --expose-gc test || node --expose-gc test)",
-    "prepublish": "node script/bootstrap && node script/build"
+    "prepublish": "node script/bootstrap && node script/build",
+    "install": "node script/npmInstall"
   }
 }

@@ -1,5 +1,5 @@
 var path = require("path");
-var spawn = require("./spawn");
+var spawn = require("./spawn").promise;
 
 module.exports = function nodePreGyp(args) {
   var npgPath = path.join(__dirname, "..", "..", "node_modules", ".bin",
