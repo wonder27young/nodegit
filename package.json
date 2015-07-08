@@ -57,6 +57,7 @@
     "nw-gyp": "^0.12.4",
     "pangyp": "^2.2.1",
     "request": "^2.55.0",
+    "semver": "^4.3.6",
     "tar": "^2.1.0"
   },
   "vendorDependencies": {

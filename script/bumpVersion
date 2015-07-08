@@ -1,14 +1,37 @@
 #!/usr/bin/env node
 var fse = require("fs-extra");
 var path = require("path");
-var pkg = require("../package");
+var semver = require("semver");
+var spawn = require("./helpers/spawn");
 
-var version = pkg.version.split(".");
-console.dir(version);
-version[2] = parseInt(version[2])+1;
-version = version.join(".");
-console.dir(version);
-pkg.version = version;
-console.dir(pkg);
+var pkg = require("../package");
+var version = pkg.version;
+var newVersion;
+if (process.argc == 3) {
+  newVersion = semver.clean(process.argv[2]);
+  if (!semver.valid(newVersion)) {
+    console.error("Invalid version: " + newVersion);
+    process.exit(1);
+  }
+  if (!semver.gt(newVersion, version)) {
+    console.error("Version is not newer than existing");
+    process.exit(1);
+  }
+}
+else {
+  newVersion = version.split(".");
+  newVersion[2] = parseInt(newVersion[2])+1;
+  newVersion = newVersion.join(".");
+  console.log("new version: " + newVersion);
+}
+pkg.version = newVersion;
 
 fse.writeJsonSync(path.join(__dirname, "..", "package.json"), pkg, {spaces: 2});
+
+spawn('git', ['add', 'package.json'])
+  .then(function() {
+    return spawn('git', ['commit', '-m', 'Bump version to ' + newVersion]);
+  })
+  .then(function() {
+    return spawn('git', ['tag', 'v' + newVersion]);
+  });
