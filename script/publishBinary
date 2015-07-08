@@ -6,7 +6,7 @@ var path = require("path");
 var npg = require("./helpers/nodePreGyp");
 
 var releaseDir = path.join(__dirname, "..", "build", "Release");
-return Promise.all(fse.readdir(releaseDir)
+return fse.readdir(releaseDir)
   .then(function(contents) {
     var promises = contents.map(function(item) {
       if (item == "nodegit.node") {
@@ -22,7 +22,7 @@ return Promise.all(fse.readdir(releaseDir)
   })
   .then(function() {
     return npg(["publish"]);
-  });
+  })
   .catch(function(reason) {
     console.error(reason);
   });
