@@ -34,7 +34,9 @@
     "node": ">= 0.8"
   },
   "bundledDependencies": [
-    "node-pre-gyp"
+    "node-pre-gyp",
+    "nodegit-promise",
+    "promisify-node"
   ],
   "dependencies": {
     "fs-extra": "^0.18.2",
