@@ -92,7 +92,6 @@
     "mocha": "mocha test/runner test/tests",
     "mochaDebug": "mocha --debug-brk test/runner test/tests",
     "test": "npm run lint && (iojs --expose-gc test || node --expose-gc test)",
-    "prepublish": "node lifecycleScripts/prepareForBuild.js",
-    "publish": "node-pre-gyp package && node-pre-gyp publish"
+    "prepublish": "node script/bootstrap && node script/build"
   }
 }
