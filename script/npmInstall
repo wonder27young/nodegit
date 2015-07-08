@@ -1,15 +1,15 @@
 #!/usr/bin/env node
-var npg = require('./helpers/nodePreGyp');
-var spawn = require('./helpers/spawn');
+var npg = require("./helpers/nodePreGyp");
+var spawn = require("./helpers/spawn");
 
-npg(['install'].concat(process.argv.slice(2)))
+npg(["install"].concat(process.argv.slice(2)))
   .then(function() {
-    console.info('[nodegit]: Downloaded binary from S3');
+    console.info("[nodegit]: Downloaded binary from S3");
   })
   .catch(function(e) {
-    console.info('[nodegit]: Failed downloading binary from S3, compiling');
-    return spawn('./script/boostrap')
+    console.info("[nodegit]: Failed downloading binary from S3, compiling");
+    return spawn("./script/boostrap")
     .then(function() {
-      return spawn('./script/build');
+      return spawn("./script/build");
     });
   });

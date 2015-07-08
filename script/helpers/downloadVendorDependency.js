@@ -19,7 +19,7 @@ module.exports = function downloadVendorDependency(name, force) {
     if (!force && fse.existsSync(keyPath)) {
       return resolve();
     }
-    console.info('[nodegit] Updating ' + name);
+    console.info("[nodegit] Updating " + name);
     fse.remove(vendorPath)
       .then(function() {
         return new Promise(function(innerResolve, innerReject) {

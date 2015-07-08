@@ -1,27 +1,27 @@
 #!/usr/bin/env node
-var cp = require('child_process');
-var path = require('path');
-var child = cp.spawn('npm', ['install', '--ignore-scripts']);
+var cp = require("child_process");
+var path = require("path");
+var child = cp.spawn("npm", ["install", "--ignore-scripts"]);
 child.stderr.pipe(process.stderr);
 child.stdout.pipe(process.stdout);
-child.on('exit', function(code) {
+child.on("exit", function(code) {
   if (code != 0) {
     process.exit(code);
   }
 
-  var downloadVendorDependency = require('./helpers/downloadVendorDependency');
-  var Promise = Promise || require('nodegit-promise');
+  var downloadVendorDependency = require("./helpers/downloadVendorDependency");
+  var Promise = Promise || require("nodegit-promise");
 
-  return downloadVendorDependency('http_parser')
+  return downloadVendorDependency("http_parser")
     .then(function() {
-      return downloadVendorDependency('libgit2');
+      return downloadVendorDependency("libgit2");
     })
     .then(function() {
       if (process.platform == "win32") {
         return;
       }
 
-      return downloadVendorDependency('libssh2')
+      return downloadVendorDependency("libssh2")
         .then(function(vendorPath) {
           if (vendorPath) {
             return new Promise(function(resolve, reject) {

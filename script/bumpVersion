@@ -28,10 +28,10 @@ pkg.version = newVersion;
 
 fse.writeJsonSync(path.join(__dirname, "..", "package.json"), pkg, {spaces: 2});
 
-spawn('git', ['add', 'package.json'])
+spawn("git", ["add", "package.json"])
   .then(function() {
-    return spawn('git', ['commit', '-m', 'Bump version to ' + newVersion]);
+    return spawn("git", ["commit", "-m", "Bump version to " + newVersion]);
   })
   .then(function() {
-    return spawn('git', ['tag', 'v' + newVersion]);
+    return spawn("git", ["tag", "v" + newVersion]);
   });
