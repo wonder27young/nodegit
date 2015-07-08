@@ -54,8 +54,6 @@
     "lodash": "^3.8.0",
     "mocha": "^2.2.4",
     "nan": "^1.8.4",
-    "nw-gyp": "^0.12.4",
-    "pangyp": "^2.2.1",
     "request": "^2.55.0",
     "semver": "^4.3.6",
     "tar": "^2.1.0"
@@ -94,17 +92,7 @@
     "mocha": "mocha test/runner test/tests",
     "mochaDebug": "mocha --debug-brk test/runner test/tests",
     "test": "npm run lint && (iojs --expose-gc test || node --expose-gc test)",
-    "generateJson": "node generate/scripts/generateJson",
-    "generateNativeCode": "node generate/scripts/generateNativeCode",
-    "generateMissingTests": "node generate/scripts/generateMissingTests",
     "prepublish": "node lifecycleScripts/prepareForBuild.js",
-    "publish": "node-pre-gyp package && node-pre-gyp publish",
-    "preinstall": "node lifecycleScripts/prepareForBuild",
-    "install": "node-pre-gyp install --fallback-to-build",
-    "installDebug": "BUILD_DEBUG=true npm install",
-    "recompile": "pangyp configure build",
-    "rebuild": "node generate && pangyp configure build",
-    "recompileDebug": "pangyp configure --debug build",
-    "rebuildDebug": "node generate && pangyp configure --debug build"
+    "publish": "node-pre-gyp package && node-pre-gyp publish"
   }
 }
