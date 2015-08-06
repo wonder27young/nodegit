@@ -1,7 +1,7 @@
 var spawn = require("child_process").spawn;
-
+var combineEnv = require("./combineEnv");
 module.exports = function (command, args, cb) {
-  var child = spawn(command, args);
+  var child = spawn(command, args, {env: combineEnv()});
   child.stderr.pipe(process.stderr);
   child.stdout.pipe(process.stdout);
   child.on('exit', cb);
