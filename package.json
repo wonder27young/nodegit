@@ -61,23 +61,10 @@
     "tar": "^2.1.0"
   },
   "vendorDependencies": {
-    "libgit2": {
-      "url": "https://github.com/nodegit/libgit2/tarball/2cb4b6534fbcbe600ecf3db95ba19e4525c8d4b8",
-      "sha": "2cb4b6534fbcbe600ecf3db95ba19e4525c8d4b8",
-      "version": "0.23.1"
-    },
-    "libssh2": {
-      "url": "http://www.libssh2.org/download/libssh2-1.4.3.tar.gz",
-      "version": "1.4.3"
-    },
-    "http_parser": {
-      "url": "https://github.com/joyent/http-parser/archive/v2.5.0.tar.gz",
-      "version": "2.5.0",
-      "0.1": {
-        "url": "https://github.com/joyent/http-parser/archive/v2.0.tar.gz",
-        "version": "2.0.0"
-      }
-    }
+    "libgit2": "0.23.1",
+    "libssh2": "1.4.3",
+    "http_parser_old": "2.0.0",
+    "http_parser_new": "2.5.0"
   },
   "binary": {
     "module_name": "nodegit",
