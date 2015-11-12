@@ -1,4 +1,6 @@
-NodeGit<a href="https://travis-ci.org/nodegit/nodegit"><img src="https://travis-ci.org/wonder27young/nodegit.svg"></a>
+NodeGit-----
+<img ng-src="https://ci.appveyor.com/api/projects/status/39ueofyj0avbqw6c?svg=true" src="https://ci.appveyor.com/api/projects/status/39ueofyj0avbqw6c?svg=true">
+
 -------
 
 > Node bindings to the [libgit2](http://libgit2.github.com/) project.
