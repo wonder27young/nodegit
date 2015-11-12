@@ -1,4 +1,4 @@
-NodeGit
+NodeGit<a href="https://travis-ci.org/nodegit/nodegit"><img src="https://travis-ci.org/wonder27young/nodegit.svg"></a>
 -------
 
 > Node bindings to the [libgit2](http://libgit2.github.com/) project.
