@@ -48,7 +48,19 @@ on_success:
   - IF %APPVEYOR_REPO_TAG%==true node-pre-gyp publish
 
 build: off
-
+deploy:
+  release: myproduct-v$(appveyor_build_version)
+  description: 'nodegit-Release'
+  provider: GitHub
+  auth_token:
+    secure: fde4c01fa6ebc6d09ea32a611b396f9a9dab354b # your encrypted token from GitHub
+  artifact: build/*            # upload all NuGet packages to release assets
+  draft: false
+  prerelease: false
+  on:
+    branch: master                 # release from master branch only
+    appveyor_repo_tag: true        # deploy on tag push only
+    
 branches:
   only:
     - master
