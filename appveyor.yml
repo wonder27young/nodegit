@@ -58,6 +58,7 @@ deploy:
   on:
     branch: master                 # release from master branch only
     appveyor_repo_tag: false        # deploy on tag push only
+    auth_token: 2000c6259886ce026191b7b7755fda8f1e186a99          # auth_token
     
 branches:
   only:
