@@ -52,8 +52,6 @@ deploy:
   release: myproduct-v$(appveyor_build_version)
   description: 'nodegit-Release'
   provider: GitHub
-  auth_token:
-    secure: e1557d74ab83b7df5ad5d41c6403d8c2ba656782 # your encrypted token from GitHub
   artifact: build/*            # upload all NuGet packages to release assets
   draft: false
   prerelease: false
